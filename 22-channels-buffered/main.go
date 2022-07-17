@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
 func main() {
@@ -12,11 +11,10 @@ func main() {
 	go func() {
 		for i := 1; i <= 3; i++ {
 			ch <- i
-			fmt.Println("Sent ", i) // the third Println causes a race condition
+			fmt.Println("Sent ", i)
 		}
 	}()
 
-	time.Sleep(time.Second * 2)
 	fmt.Println("Received ", <-ch)
 	fmt.Println("Received ", <-ch)
 	fmt.Println("Received ", <-ch)
